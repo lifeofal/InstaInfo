@@ -81,6 +81,7 @@ class InstaBot:
         print("Log In complete.. Running after_Log")
         self.after_Log()
 
+        print("After Log In complete.. Running after_Log")
 
 
     def after_Log(self):
