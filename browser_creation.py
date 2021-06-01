@@ -7,10 +7,7 @@ from chrome_options_args import chromeOptions_args
 from webdriver_manager.chrome import ChromeDriverManager
 from chrome_Window_init import starter_driver
 from Unfollowers import UnfollowerClass
-
-my_path = os.path.dirname(os.path.abspath(__file__))
-cookie_path = os.path.join(my_path, "resources/cookies.txt")
-list_path = os.path.join(my_path, "resources")
+from path_config import my_path, cookie_path, list_path
 
 
 def save_cookie(driver):

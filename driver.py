@@ -9,6 +9,7 @@ from chrome_options_args import chromeOptions_args
 from webdriver_manager.chrome import ChromeDriverManager
 from chrome_Window_init import starter_driver
 from Unfollowers import UnfollowerClass
+from Non_Followers import non_followers
 
 
 def main():
@@ -73,7 +74,9 @@ def main():
     multi(url,headless)
 
 
+
 if __name__ == '__main__':
     main()
+    non_followers()
 
 

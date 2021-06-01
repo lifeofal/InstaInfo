@@ -6,7 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 class starter_driver:
-    global driver
+    #global driver
 
     def __init__(self, user, pw, answer):
         self.user = user
