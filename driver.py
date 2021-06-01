@@ -62,9 +62,6 @@ def main():
     """)
 
     headless = input()
-
-    user = 'lifeof_alejandro'
-    pw = 'IndiaMike0722!'
     #-----Create Starter Driver -----
     url = 'http://www.instagram.com/{}'.format(user)
     d1 = starter_driver(user,pw,headless)
