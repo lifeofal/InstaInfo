@@ -10,7 +10,7 @@ class starter_driver:
 
     def __init__(self, user, pw, answer):
         self.user = user
-        self.chrome_options = chromeOptions_args
+        self.chrome_options = chromeOptions_args.chromeOptions()
 
 
         #

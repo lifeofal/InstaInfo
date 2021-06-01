@@ -73,9 +73,10 @@ def main():
     save_cookie(d1.driver)
     print('Closing initial driver')
     d1.driver.close()
-    multi(url)
+    multi(url,headless)
 
 
 if __name__ == '__main__':
     main()
+
 

@@ -9,12 +9,15 @@ from chrome_Window_init import starter_driver
 from Unfollowers import UnfollowerClass
 
 my_path = os.path.dirname(os.path.abspath(__file__))
-cookie_path = os.path.join(my_path, "resources\\cookies.txt")
-list_path = os.path.join(my_path, "resources\\")
+cookie_path = os.path.join(my_path, "resources/cookies.txt")
+list_path = os.path.join(my_path, "resources")
+
 
 def save_cookie(driver):
     with open(cookie_path, 'wb') as filehandler:
+        print(cookie_path)
         pickle.dump(driver.get_cookies(), filehandler)
+
 
 def load_cookie(driver, path):
     with open(path, 'rb') as cookiesfile:
@@ -37,25 +40,20 @@ def create_browser_with_cookies(headless, url):
 
     return driver
 
-def write_list(num,url):
-    driver = create_browser_with_cookies('n', url)
-    if (num == 0):
-        flist = UnfollowerClass(driver, 'following')
-        file_name = 'following_list.txt'
 
+def write_list(num, url, option):
+    driver = create_browser_with_cookies(option, url)
+    if num == 0:
+        UnfollowerClass(driver, 'following')
     else:
-        flist = UnfollowerClass(driver, 'followers')
-        file_name = 'followers_list.txt'
-    print('list creation done')
-    with open(os.path.join(list_path, file_name), 'w') as fp:
-        pickle.dump(flist, fp)
+        UnfollowerClass(driver, 'followers')
 
 
-def multi(url):
+def multi(url, option):
     pool = Pool(processes=2)
     for i in range(2):
         print(i)
-        async_result = pool.apply_async(write_list, args=(i,url))
+        async_result = pool.apply_async(write_list, args=(i, url, option))
 
     pool.close()
     pool.join()

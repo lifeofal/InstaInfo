@@ -1,39 +1,45 @@
+import os
+import pickle
+
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
+
 
 class UnfollowerClass:
 
     def __init__(self, objectDriver, path):
         self.driver = objectDriver
-        if(path == 'following'):
-            self.following()
-        else:
-            self.followers()
+        self.my_path = os.path.dirname(os.path.abspath(__file__))
 
-    def following(self):
+        self.list_path = os.path.join(self.my_path, "resources")
+        if path == 'following':
+            self.following('following_list.txt')
+        else:
+            self.followers('followers_list.txt')
+
+    def following(self, file_name):
+        print('following search started')
         self.driver.find_element_by_xpath("//*[@id=\"react-root\"]/section/main/div/header/section/ul/li[3]/a") \
             .click()
 
-        self.following_names = self._get_names("Following")
+        self._get_names("Following", file_name)
 
         self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[1]/div/div[2]/button") \
             .click()
-        print('returning list')
-        return self.following_names
+        print('following search ended')
 
-    def followers(self):
-
+    def followers(self, file_name):
+        print('follower search started')
         self.driver.find_element_by_xpath("//*[@id=\"react-root\"]/section/main/div/header/section/ul/li[2]/a") \
             .click()
 
-        self.followers_names = self._get_names("Followers")
+        self._get_names("Followers", file_name)
 
         self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[1]/div/div[2]/button") \
             .click()
-        print('returning list')
-        return self.followers_names
+        print('follower search ended')
 
-    def _get_names(self, methodName):
+    def _get_names(self, methodName, file_name):
         print("the {} method has called the _get_names method".format(methodName))
         try:
 
@@ -42,9 +48,6 @@ class UnfollowerClass:
             self.driver.execute_script('arguments[0].scrollIntoView()', sugs)
         except NoSuchElementException:
             print("No suggestions tab found. Continuing..")
-
-
-
 
         last_ht, ht = 0, 1
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]")
@@ -60,4 +63,9 @@ class UnfollowerClass:
         links = scroll_box.find_elements_by_tag_name('a')
         names = [name.text for name in links if name.text != '']
         print(names)
-        return names
+
+        print('list creation done. Starting pickling to file location')
+        listPath = os.path.join(self.list_path, file_name)
+        print(listPath)
+        with open(listPath, 'wb') as fp:
+            pickle.dump(names, fp)
