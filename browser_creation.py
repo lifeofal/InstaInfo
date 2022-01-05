@@ -9,6 +9,10 @@ from chrome_Window_init import starter_driver
 from Unfollowers import UnfollowerClass
 from path_config import my_path, cookie_path, list_path
 
+my_path = os.path.dirname(os.path.abspath(__file__))
+cookie_path = os.path.join(my_path, "resources/cookies.txt")
+list_path = os.path.join(my_path, "resources/")
+
 
 def save_cookie(driver):
     with open(cookie_path, 'wb') as filehandler:
@@ -51,6 +55,6 @@ def multi(url, option):
     for i in range(2):
         print(i)
         async_result = pool.apply_async(write_list, args=(i, url, option))
-
+#creating diff pools of multi threads
     pool.close()
     pool.join()

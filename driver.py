@@ -10,6 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from chrome_Window_init import starter_driver
 from Unfollowers import UnfollowerClass
 from Non_Followers import non_followers
+from secrets import *
 
 
 def main():
@@ -50,10 +51,10 @@ def main():
     InstaInfo does not save you username or password.
     InstaInfo is also not responsible for your account.
     """)
-    user = input("Username: ")
-    pw = input("Password: ")
+    #user = input("Username: ")
+    #pw = input("Password: ")
 
-    answer = int(input())
+    #answer = int(input())
 
     print("""
     Would you like to run in Headless mode? (y/n)

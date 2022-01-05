@@ -1,4 +1,4 @@
-from secrets import pw
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from chrome_options_args import chromeOptions_args

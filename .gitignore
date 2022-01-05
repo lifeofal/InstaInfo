@@ -4,3 +4,4 @@ env/
 Unfollowers2.py
 __pycache__/
 resources/*.txt
+.DS_Store

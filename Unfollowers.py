@@ -50,7 +50,7 @@ class UnfollowerClass:
             print("No suggestions tab found. Continuing..")
 
         last_ht, ht = 0, 1
-        scroll_box = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]")
+        scroll_box = self.driver.find_element_by_xpath("//div[@class='isgrP']")
         while last_ht != ht:
             last_ht = ht
             sleep(1)
