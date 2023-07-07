@@ -1,19 +1,11 @@
-import os
-import pickle
-import sys
-from multiprocessing import Pool
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from browser_creation import save_cookie, multi
-from chrome_options_args import chromeOptions_args
-from webdriver_manager.chrome import ChromeDriverManager
-from chrome_Window_init import starter_driver
-from Unfollowers import UnfollowerClass
 from Non_Followers import non_followers
-from secrets import *
-
+from browser_creation import save_cookie, multi
+from chrome_Window_init import starter_driver
+from dotenv import load_dotenv
+import os
 
 def main():
+    load_dotenv()
     #----------------------------------------------------------------------------------#
     #   Driver to initialize starter window. User will have menu to choose different
     #   info retrieval actions. Actions like Follower/Following comparison will run in
@@ -48,10 +40,10 @@ def main():
     Enter Credentials
     
                     Disclaimer: 
-    InstaInfo does not save you username or password.
+    InstaInfo does not save your username and we will never ask you for log in credentials such as passwords or emails.
     InstaInfo is also not responsible for your account.
     """)
-    #user = input("Username: ")
+    user = input("Username: ")
     #pw = input("Password: ")
 
     #answer = int(input())
@@ -66,7 +58,9 @@ def main():
     headless = input()
     #-----Create Starter Driver -----
     url = 'http://www.instagram.com/{}'.format(user)
-    d1 = starter_driver(user,pw,headless)
+    login_user = os.getenv('USER')
+    login_pass = os.getenv('PASSWORD')
+    d1 = starter_driver(login_user,login_pass,headless)
 
 
     save_cookie(d1.driver)

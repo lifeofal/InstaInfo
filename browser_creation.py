@@ -10,8 +10,8 @@ from Unfollowers import UnfollowerClass
 from path_config import my_path, cookie_path, list_path
 
 my_path = os.path.dirname(os.path.abspath(__file__))
-cookie_path = os.path.join(my_path, "resources/cookies.txt")
-list_path = os.path.join(my_path, "resources/")
+cookie_path = os.path.join(my_path, "resources\\cookies.txt")
+list_path = os.path.join(my_path, "resources\\")
 
 
 def save_cookie(driver):
@@ -32,8 +32,8 @@ def create_browser_with_cookies(headless, url):
     if headless == 'n' or headless == 'N':
         driver = webdriver.Chrome(ChromeDriverManager().install())
     else:
-        chromeOptions = chromeOptions_args.chromeOptions()
-        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chromeOptions)
+        chrome_options = chromeOptions_args.chromeOptions()
+        driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
     driver.implicitly_wait(5)
     driver.get('http://www.instagram.com')
     driver = load_cookie(driver, cookie_path)
@@ -43,10 +43,14 @@ def create_browser_with_cookies(headless, url):
 
 
 def write_list(num, url, option):
-    driver = create_browser_with_cookies(option, url)
     if num == 0:
+        # url += '\\following'
+        driver = create_browser_with_cookies(option, url)
         UnfollowerClass(driver, 'following')
+
     else:
+        # url += '\\followers'
+        driver = create_browser_with_cookies(option, url)
         UnfollowerClass(driver, 'followers')
 
 
